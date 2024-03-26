@@ -13,16 +13,16 @@
 </head>
 <body>
     <div class="container">
-		<nav class="navbar navbar-expand-sm bg-light navbar-light" >
-		  <ul class='navbar-nav'>
+		<header class="d-flex justify-content-center py-3">
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 			<li class='navbar-item disabled' style='margin-right: 20px'>
-				<a class='btn btn-link' href='#'>Главная</a>
+				<a class='btn btn-link link-secondary' href='#'>Главная</a>
 			</li>
 			<li class='navbar-item' style='margin-right: 20px'>
 				<a class='btn btn-link' href='#'>О сайте</a>
 			</li>
 		  </ul>
-		</nav>
+		</header>
 		<h1 class="text-center">Добро пожаловать на главную!</h1>
         {% for cat in cate %}
             <div class="card">
