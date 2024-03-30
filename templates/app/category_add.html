@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Добавить категорию
+{% endblock %}
+
+{% block body %}
+    {% if id %}
+        <h2>Редактирование категории №{{ id }}</h2>
+    {% else %}
+        <h2>Добавление</h2>
+    {% endif %}
+    {% if not id %}
+        <form method="post" action="{% url "app:category_add" %}">
+    {% else %}
+        <form method="post" action="{% url "app:category_edit" id %}">
+    {% endif %}
+        {% csrf_token %}
+        {% if id %}
+            <input type="hidden" name="method" value="PUT">
+        {% endif %}
+        <div class="form-group">
+            <label for="name">Категория</label>
+            <input class="form-control{% if errors.name %} is-invalid{% endif %}"
+                   type="text" id="name" name="name" value="{{ name }}" placeholder="Введите категорию">
+            {% if errors.name %}
+                <div class="invalid-feedback">{{ errors.name }}</div>
+            {% endif %}
+        </div>
+        <input class="form-control" type="submit" value="Сохранить">
+    </form>
+{% endblock %}

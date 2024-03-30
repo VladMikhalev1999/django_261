@@ -8,11 +8,27 @@
 
 {% block body %}
 <h1 class="text-center">Добро пожаловать на главную!</h1>
+    <a class="btn btn-primary" href="{% url "app:category_add" %}">Добавить</a>
     {% for cat in cate %}
         <div class="card">
             <h5>ИД: {{ cat.id }}</h5>
-            <p>Категория: {{ cat.name }}</p>
+            <p>Категория: <a href="{% url "app:category_edit" cat.id %}">{{ cat.name }}</a></p>
+            <form method="post" onsubmit="submitForm(event)" action="{% url "app:index" %}">
+                <!-- GET POST PUT PATCH DELETE -->
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ cat.id }}">
+                <input type="hidden" name="method" value="DELETE">
+                <input type="submit" class="btn btn-danger" value="Удалить">
+            </form>
         </div>
     {% endfor %}
-    {% include "login.html" %}
+    <script>
+        function submitForm(event) {
+            event.preventDefault()
+            console.log(event.target)
+            if (confirm("Вы уверены, что хотите удалить категорию?")) {
+                event.target.submit()
+            }
+        }
+    </script>
 {% endblock %}
